@@ -4,6 +4,8 @@ venv/
 .env
 dataset/
 images_OS/
+.vscode/
+.deployment
 geofence_insert.py
 geofence.json
 deploy.prototxt.txt
