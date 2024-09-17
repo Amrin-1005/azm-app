@@ -96,50 +96,51 @@ def process_and_insert(identity_list, current_time):
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    try:
-        # Get the image from the request
-        data = request.json
-        image_data = base64.b64decode(data['image'])
-        np_img = np.frombuffer(image_data, np.uint8)
-        img = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
+    # try:
+    #     # Get the image from the request
+    #     data = request.json
+    #     image_data = base64.b64decode(data['image'])
+    #     np_img = np.frombuffer(image_data, np.uint8)
+    #     img = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
         
-        # Perform face recognition directly on the image
-        backend = backends[0]  # Choose a backend
-        results = DeepFace.find(
-            img_path=img,
-            db_path="images_OS",
-            anti_spoofing=False,  # Adjust as needed
-            model_name="Dlib",
-            distance_metric="cosine",
-            detector_backend="opencv",
-            enforce_detection=False
-        )
+    #     # Perform face recognition directly on the image
+    #     backend = backends[0]  # Choose a backend
+    #     results = DeepFace.find(
+    #         img_path=img,
+    #         db_path="images_OS",
+    #         anti_spoofing=False,  # Adjust as needed
+    #         model_name="Dlib",
+    #         distance_metric="cosine",
+    #         detector_backend="opencv",
+    #         enforce_detection=False
+    #     )
 
-        # Log and check the result
-        logging.info("Returned data: %s", results)
-        if results and isinstance(results, list) and len(results) > 0:
-            df = results[0]
-            if not df.empty:
-                # Extract and trim the identity column directly
-                identity_list = df['identity'].apply(lambda x: os.path.splitext(os.path.basename(x))[0].replace('_', ' ')).tolist()
-                current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                print(current_time)
-                # Start a new thread for inserting attendance data
-                threading.Thread(target=process_and_insert, args=(identity_list, current_time)).start()
+    #     # Log and check the result
+    #     logging.info("Returned data: %s", results)
+    #     if results and isinstance(results, list) and len(results) > 0:
+    #         df = results[0]
+    #         if not df.empty:
+    #             # Extract and trim the identity column directly
+    #             identity_list = df['identity'].apply(lambda x: os.path.splitext(os.path.basename(x))[0].replace('_', ' ')).tolist()
+    #             current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    #             print(current_time)
+    #             # Start a new thread for inserting attendance data
+    #             threading.Thread(target=process_and_insert, args=(identity_list, current_time)).start()
 
-                # Immediately respond to the client with the recognition result
-                return jsonify({"matches": identity_list, "timestamp": current_time})
+    #             # Immediately respond to the client with the recognition result
+    #             return jsonify({"matches": identity_list, "timestamp": current_time})
 
                 
-            else:
-                return jsonify({"error": "No match found"}), 404
-        else:
-            return jsonify({"error": "No match found"}), 404
+    #         else:
+    #             return jsonify({"error": "No match found"}), 404
+    #     else:
+    #         return jsonify({"error": "No match found"}), 404
 
-    except Exception as e:
-        logging.error("Error occurred: %s", str(e))
-        logging.error("Traceback: %s", traceback.format_exc())
-        return jsonify({"error": "Internal server error"}), 500
+    # except Exception as e:
+    #     logging.error("Error occurred: %s", str(e))
+    #     logging.error("Traceback: %s", traceback.format_exc())
+    #     return jsonify({"error": "Internal server error"}), 500
+     return jsonify({"message": "Welcome to the face recognition service!"})
     
     
 def get_nearby_geofences(user_lat, user_lon):
@@ -184,18 +185,19 @@ def get_nearby_geofences(user_lat, user_lon):
 
 @app.route('/geofences', methods=['POST'])
 def get_nearby_geofences_endpoint():
-    data = request.json
-    user_lat = data['latitude']
-    user_lon = data['longitude']
+    # data = request.json
+    # user_lat = data['latitude']
+    # user_lon = data['longitude']
     
-    print(f"Received latitude: {user_lat}, longitude: {user_lon}")
+    # print(f"Received latitude: {user_lat}, longitude: {user_lon}")
     
-    if user_lat is None or user_lon is None:
-        return jsonify({"error": "Latitude or longitude not provided"}), 400
+    # if user_lat is None or user_lon is None:
+    #     return jsonify({"error": "Latitude or longitude not provided"}), 400
     
-    nearby_geofences = get_nearby_geofences(user_lat, user_lon)
+    # nearby_geofences = get_nearby_geofences(user_lat, user_lon)
     
-    return jsonify({'geofences': nearby_geofences})
+    # return jsonify({'geofences': nearby_geofences})
+    return jsonify({"message": "Geofences endpoint is working!"})
 
 # if __name__ == '__main__':
 #     app.run(host='0.0.0.0', port=8000)
