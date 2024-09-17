@@ -25,7 +25,8 @@ EXPOSE 5000
 ENV FLASK_APP=app.py
 
 # Run the application
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["gunicorn", "--workers", "3", "--bind", "0.0.0.0:8000", "app:app"]
+
 
 # Use a base image
 FROM python:3.9
