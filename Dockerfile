@@ -25,7 +25,7 @@ EXPOSE 80
 ENV FLASK_APP=app.py
 
 # Run the application
-CMD ["gunicorn", "--workers", "3", "--bind", "0.0.0.0:80", "app:app"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=80"]
 
 
 # # Use a base image

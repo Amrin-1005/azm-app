@@ -199,6 +199,6 @@ def get_nearby_geofences_endpoint():
     # return jsonify({'geofences': nearby_geofences})
     return jsonify({"message": "Geofences endpoint is working!"})
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=8000)
-#     app.debug = True
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)
+    app.debug = True
