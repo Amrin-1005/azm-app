@@ -201,7 +201,7 @@ def get_nearby_geofences_endpoint():
 
 @app.route('/')
 def index():
-    return jsonify({"message": "Hello, world,Amrin!"})
+    return jsonify({"message": "Hello,Amrin!"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
