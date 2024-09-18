@@ -197,7 +197,7 @@ def get_nearby_geofences_endpoint():
     nearby_geofences = get_nearby_geofences(user_lat, user_lon)
     
     return jsonify({'geofences': nearby_geofences})
-    # return jsonify({"message": "Hello,Geofences!"})
+    # return jsonify({"message": "Hello,Geofences!!!!!"})
 
 @app.route('/')
 def index():
