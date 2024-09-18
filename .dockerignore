@@ -1,0 +1,39 @@
+# Ignore Python cache and other unnecessary files
+__pycache__
+*.pyc
+*.pyo
+
+# Ignore git and vscode directories
+.git
+.vscode
+
+# Ignore development and temporary files
+.github
+.deployment
+Procfile
+README.md
+deploy.prototxt.txt
+geofence.json
+geofence_insert.py
+deepface_model.py
+dp_face1.py
+dp_face2.py
+dp_face3.py
+dp_face4.py
+test.py
+runtime.txt
+
+# Ignore large model files
+*.caffemodel
+*.dat
+*.weights
+*.pt
+*.whl
+*.cfg
+
+# Ignore local virtual environment
+venv
+
+# Ignore large images and datasets
+dataset
+images_OS
