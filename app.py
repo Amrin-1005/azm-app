@@ -94,7 +94,7 @@ def process_and_insert(identity_list, current_time):
         # Insert the first match into Azure SQL
         insert_attendance(identity_list[0], current_time)
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def predict():
     try:
         # Get the image from the request
@@ -140,6 +140,7 @@ def predict():
         logging.error("Error occurred: %s", str(e))
         logging.error("Traceback: %s", traceback.format_exc())
         return jsonify({"error": "Internal server error"}), 500
+    # return jsonify({"message": "Hello, world,predict!"})
     
     
 def get_nearby_geofences(user_lat, user_lon):
@@ -182,7 +183,7 @@ def get_nearby_geofences(user_lat, user_lon):
     
     return geofences
 
-@app.route('/geofences', methods=['POST'])
+@app.route('/geofences', methods=['GET', 'POST'])
 def get_nearby_geofences_endpoint():
     data = request.json
     user_lat = data['latitude']
@@ -196,7 +197,12 @@ def get_nearby_geofences_endpoint():
     nearby_geofences = get_nearby_geofences(user_lat, user_lon)
     
     return jsonify({'geofences': nearby_geofences})
+    # return jsonify({"message": "Hello, world,Geofences!"})
+
+@app.route('/')
+def index():
+    return jsonify({"message": "Hello, world,Amrin!"})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
-    app.debug = True
+    app.run(host='0.0.0.0', port=5000, debug=True)
+    
