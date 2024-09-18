@@ -6,6 +6,12 @@ dataset/
 images_OS/
 .vscode/
 .deployment
+.dockerignore
+dp_face1.py
+dp_face2.py
+dp_face3.py
+dp_face4.py
+deepface_model.py
 geofence_insert.py
 geofence.json
 deploy.prototxt.txt
@@ -15,3 +21,4 @@ yolov8n.pt
 yolov3.weights
 yolov3.cfg
 dlib-19.24.99-cp312-cp312-win_amd64.whl
+test.py
