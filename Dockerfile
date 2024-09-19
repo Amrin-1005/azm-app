@@ -32,17 +32,35 @@
 
 
 
+# Use a slim base image
 FROM python:3.12-slim
+
+# Set working directory
 WORKDIR /app
+
+# Install dependencies early to leverage Docker caching
 COPY requirements.txt /app/
-RUN pip install -r requirements.txt
-RUN apt-get update && apt-get install -y \
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install additional system dependencies if needed (e.g., for OpenCV)
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1-mesa-glx \
     libglib2.0-0 \
     unixodbc \
-    unixodbc-dev
+    unixodbc-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy only necessary files to the image
 COPY . /app
+
+# Expose the port
 EXPOSE 5000
+
+# Set environment variables
 ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
+
+# Start the Flask application
 CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+
