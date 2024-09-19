@@ -1,1 +1,2 @@
-web: gunicorn --workers 3 --bind 0.0.0.0:8000 app:app
+web: flask run --host=0.0.0.0 --port=$PORT
+
