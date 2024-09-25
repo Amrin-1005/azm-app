@@ -89,7 +89,7 @@ def insert_attendance(employee_id, timestamp):
         
 
 def process_and_insert(identity_list, current_time):
-    """Function to process data and insert it into SQL in a separate thread."""
+    
     if identity_list:
         # Insert the first match into Azure SQL
         insert_attendance(identity_list[0], current_time)
