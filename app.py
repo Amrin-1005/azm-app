@@ -99,7 +99,7 @@ def predict():
     try:
         # Get the image from the request
         data = request.json
-        logging.info(f"Received image data: {data}")
+        # logging.info(f"Received image data: {data}")
         if 'image' not in data:
             return jsonify({"error": "No 'image' field found"}), 400
         
@@ -145,6 +145,21 @@ def predict():
         logging.error("Traceback: %s", traceback.format_exc())
         return jsonify({"error": "Internal server error"}), 500
     # return jsonify({"message": "Hello, world,predict!"})
+
+# @app.route('/predict', methods=['GET', 'POST'])
+# def predict():
+#     try:
+#         # Log that the endpoint was reached
+#         logging.info("Predict endpoint reached successfully.")
+
+#         # Return a simple success response
+#         return jsonify({"message": "URL is working!", "status": "success"}), 200
+
+#     except Exception as e:
+#         logging.error("Error occurred: %s", str(e))
+#         logging.error("Traceback: %s", traceback.format_exc())
+#         return jsonify({"error": "Internal server error"}), 500
+
     
     
 def get_nearby_geofences(user_lat, user_lon):
