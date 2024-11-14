@@ -99,6 +99,10 @@ def predict():
     try:
         # Get the image from the request
         data = request.json
+        logging.info(f"Received image data: {data}")
+        if 'image' not in data:
+            return jsonify({"error": "No 'image' field found"}), 400
+        
         image_data = base64.b64decode(data['image'])
         np_img = np.frombuffer(image_data, np.uint8)
         img = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
